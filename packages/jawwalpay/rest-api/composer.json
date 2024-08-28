@@ -1,0 +1,19 @@
+{
+    "name": "jawwalpay/rest-api",
+    "description": "Integration With Jawwal Pay Gateway",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hazem alb",
+            "email": "hazemalb96@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Jawwalpay\\RestApi\\": "src/"
+        }
+    },
+    "require": {}
+}

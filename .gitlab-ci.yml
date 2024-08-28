@@ -1,0 +1,21 @@
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - echo "$Dash_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+deploy_staging:
+  type: deploy
+  environment:
+    name: staging
+    url: dash.ps
+  script:
+    - ssh ubuntu@dash.ps "cd /var/www/html/projects/telelink && git checkout master && git reset --hard origin/master  && git pull origin master && composer install && exit"
+  only:
+    - master
